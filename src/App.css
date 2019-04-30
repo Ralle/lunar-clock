@@ -8,7 +8,7 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: #aaa;
-  min-height: 100vh;
+  height: 100vh;
 }
 
 .App .show {
