@@ -1,26 +1,49 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import moment from 'moment';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  constructor()
+  {
+    super();
+    this.checkSleep(42);
+  }
+
+  componentDidMount() {
+    this.timer = setInterval(this.checkSleep.bind(this), 1000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timer);
+  }
+
+  checkSleep(isFirst = 43) {
+    const morning = moment().hours(6).minutes(15);
+    const evening = moment().hours(18);
+    const mustSleep = !moment().isBetween(morning, evening, '[]');
+    const time = moment().format('HH:mm');
+    const state = { mustSleep, time };
+    if (isFirst === 42) {
+      this.state = state;
+    }
+    else
+    {
+      this.setState(state);
+    }
+  }
+
+  render() {
+    return (
+      <div className="App">
+          <div className="show">
+            {this.state.mustSleep ? 'SLEEP' : 'WAKE UP'}
+          </div>
+          <div className="time">
+            {this.state.time}
+          </div>
+      </div>
+    );
+  }
 }
 
 export default App;
