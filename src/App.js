@@ -6,7 +6,7 @@ class App extends React.Component {
   constructor()
   {
     super();
-    this.checkSleep(42);
+    this.checkSleep(true);
   }
 
   componentDidMount() {
@@ -17,13 +17,13 @@ class App extends React.Component {
     clearInterval(this.timer);
   }
 
-  checkSleep(isFirst = 43) {
+  checkSleep(isFirst = false) {
     const morning = moment().hours(6).minutes(15);
     const evening = moment().hours(18);
     const mustSleep = !moment().isBetween(morning, evening, '[]');
     const time = moment().format('HH:mm');
     const state = { mustSleep, time };
-    if (isFirst === 42) {
+    if (isFirst === true) {
       this.state = state;
     }
     else
