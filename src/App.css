@@ -2,23 +2,33 @@
   text-align: center;
   background-color: #000;
 
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: #aaa;
+  font-size: calc(40px);
+  color: #ccc;
   height: 100vh;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
-.App .show {
-  flex: 1 1 auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.App.sleep {
+  background-image: url(nat_luna.jpg);
 }
 
-.App .time {
-  flex: 0 0 auto;
+.App.wake {
+  background-image: url(morgen_luna.jpg);
+}
+
+.App .bottom {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+.App .bottom .time {
+  width: 160px;
+  padding: 14px;
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 10px;
+  margin: 0 auto;
   margin-bottom: 10px;
 }

@@ -6,7 +6,7 @@ class App extends React.Component {
   constructor()
   {
     super();
-    this.checkSleep(true);
+    this.state = this.getNextState();
   }
 
   componentDidMount() {
@@ -17,30 +17,28 @@ class App extends React.Component {
     clearInterval(this.timer);
   }
 
-  checkSleep(isFirst = false) {
+  getNextState() {
     const morning = moment().hours(6).minutes(15);
-    const evening = moment().hours(18);
+    const evening = moment().hours(18).minutes(45);
+    // const evening = moment().hours(10);
     const mustSleep = !moment().isBetween(morning, evening, '[]');
     const time = moment().format('HH:mm');
-    const state = { mustSleep, time };
-    if (isFirst === true) {
-      this.state = state;
-    }
-    else
-    {
-      this.setState(state);
-    }
+    return { mustSleep, time };
+  }
+
+  checkSleep() {
+    this.setState(this.getNextState());
   }
 
   render() {
     return (
-      <div className="App">
-          <div className="show">
-            {this.state.mustSleep ? 'SLEEP' : 'WAKE UP'}
-          </div>
+      <div className={"App " + (this.state.mustSleep ? 'sleep' : 'wake')}>
+        {/* <div className="show"></div> */}
+        <div className="bottom">
           <div className="time">
             {this.state.time}
           </div>
+        </div>
       </div>
     );
   }
